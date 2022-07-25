@@ -1,0 +1,333 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Supplementary Materials: It matters who is spreading monkeypox},
+  pdfauthor={Jonathan Smith, PhD, MPH},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Supplementary Materials: It matters who is spreading monkeypox}
+\author{Jonathan Smith, PhD, MPH}
+\date{2022-07-24}
+
+\begin{document}
+\maketitle
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Written in R version 4.1.2.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{background}{%
+\subsection{Background}\label{background}}
+
+We assume the number of secondary cases produced from each infectious
+case is distributed according to a negative binomial distribution with
+mean \(R_0\) (the basic reproductive number) and dispersion parameter
+\(k\). The parameter \(k\) quantifies the degree of individual
+heterogeneity by measuring overdispersion in the distribution (e.g.,
+higher than expected variation). For a given \(R<1\), smaller values of
+\(k\) (\(k<<1\)) suggest increased heterogeneity in the number of
+secondary cases between individual index cases. As \(k\) increases,
+transmission becomes more uniform and centered around the mean, \(R_0\).
+
+\hypertarget{proportion-of-secondary-cases-attributed-to-the-proportion-of-infectious-cases}{%
+\subsection{Proportion of secondary cases attributed to the proportion
+of infectious
+cases}\label{proportion-of-secondary-cases-attributed-to-the-proportion-of-infectious-cases}}
+
+Lloyd-Smith \emph{et al.} (L-S)
+(\href{https://static-content.springer.com/esm/art\%3A10.1038\%2Fnature04153/MediaObjects/41586_2005_BFnature04153_MOESM1_ESM.pdf}{supplementary
+information 2.2.5}) propose a distribution for describing transmission
+based from the distribution of the individual reproduction number
+\(\nu\):
+\[ F_\mathrm{trans}(x) = \frac{1}{R_0} \int_0^x u\,  f_\nu (u) \, du \]
+This gives the cumulative distribution function (CDF) in terms of the
+individual reproduction number density \(f_\nu\), as the proportion of
+all transmission due to infectious individuals with reproduction number
+\(\nu <x\).
+
+In the specific case when \(\nu\) is gamma distributed with shape
+parameter \(k>0\) and rate parameter \(k/R_0\), where \(R_0\) is the
+mean (expected) individual reproduction number, we have
+\[ f_\nu(u) = \frac{k^k}{R_0^k \, \Gamma(k)} u^{k-1} e^{-ku/R_0} \] It
+follows that
+\[ \begin{eqnarray*} f_\mathrm{trans}(x) =  F'_\mathrm{trans}(x) 
+&=& \frac{1}{R_0} x f_\nu(x) 
+\\
+&=& \frac{k^k}{R_0^{k+1} \, \Gamma(k)} x^k e^{-kx/R_0} 
+\\
+&=& \frac{k^{k+1}}{R_0^{k+1} \, \Gamma(k+1)} x^k e^{-kx/R_0} 
+\\
+&\sim & \mathrm{Gamma}(k+1, k/R_0) 
+\end{eqnarray*}\]
+
+The rate parameter remains the same and the shape parameter increases by
+1.
+
+To calculate \(t_p\), the expected proportion of transmission due to the
+most infectious \(100p\)\% of cases, we first find the \((1-p)\)th
+centile of the individual reproduction number,
+\(x_p = F^{-1}_\nu(1-p)\), then calculate
+\(t_p = 1-F_\mathrm{trans}(x_p)\). As both random variables are gamma
+distributed, this is implemented in R via the qgamma (\(F^{-1}\)) and
+pgamma (\(F\)) functions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{propinfection }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(R, k, prop)\{}
+\NormalTok{  xp }\OtherTok{\textless{}{-}} \FunctionTok{qgamma}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ prop, }\AttributeTok{shape =}\NormalTok{ k, }\AttributeTok{rate =}\NormalTok{ k}\SpecialCharTok{/}\NormalTok{R) }
+\NormalTok{  tp }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pgamma}\NormalTok{(xp, }\AttributeTok{shape =}\NormalTok{ k}\SpecialCharTok{+}\DecValTok{1}\NormalTok{, }\AttributeTok{rate =}\NormalTok{ k}\SpecialCharTok{/}\NormalTok{R) }
+  \FunctionTok{return}\NormalTok{(tp) }
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{the-relationship-between-p-and-t_p}{%
+\subsection{\texorpdfstring{The relationship between \(p\) and
+\(t_p\)}{The relationship between p and t\_p}}\label{the-relationship-between-p-and-t_p}}
+
+Parameterizing by \(x_p\), and noting that \(p=1-F_\nu(x_p)\), the first
+derivative is \[ \frac{d t_p}{dp} = \frac{dt_p/dx_p}{dp/dx_p} 
+= \frac{-F'_\mathrm{trans}(x_p)}{-F'_\nu(x_p)} = 
+\frac{R_0^{-1} x_p f_\nu(x_p)}{f_\nu(x_p)} = \frac{x_p}{R_0} > 0\] which
+confirms that \(t_p\) is an increasing function of \(p\). When
+\(x_p=0\), \((p, t_p) = (1,1)\) at which the point the derivative is
+zero (horizontal tangent). Similarly, when \(x_p=+\infty\),
+\((p, t_p) = (0,0)\) at which the point the derivative is infinite
+(vertical tangent).
+
+The second derivative is negative implying concavity of the graph of
+\(t_p\) as a function of \(p\). \[ \frac{d^2 t_p}{dp^2} 
+= \frac{d}{dx_p} \left(\frac{d t_p}{dp}\right) \times \frac{d x_p}{dp} 
+= \frac{1}{R_0} \times \frac{1}{dp/dx_p} = - \frac{1}{R_0 f_\nu(x_p)} <0\]
+These properties can be seen in Figure 1A:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xx }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{0.001}\NormalTok{)}
+\NormalTok{k }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{100000}\NormalTok{) }\CommentTok{\# 100000 {-}\textgreater{} \textasciitilde{}infty (homogenous transmission)}
+\NormalTok{plotdata }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(xx, }
+                  \FunctionTok{propinfection}\NormalTok{(}\AttributeTok{R =} \DecValTok{3}\NormalTok{, }\AttributeTok{k =}\NormalTok{ k[}\DecValTok{1}\NormalTok{], xx),}
+                  \FunctionTok{propinfection}\NormalTok{(}\AttributeTok{R =} \DecValTok{3}\NormalTok{, }\AttributeTok{k =}\NormalTok{ k[}\DecValTok{2}\NormalTok{], xx),}
+                  \FunctionTok{propinfection}\NormalTok{(}\AttributeTok{R =} \DecValTok{3}\NormalTok{, }\AttributeTok{k =}\NormalTok{ k[}\DecValTok{3}\NormalTok{], xx),}
+                  \FunctionTok{propinfection}\NormalTok{(}\AttributeTok{R =} \DecValTok{3}\NormalTok{, }\AttributeTok{k =}\NormalTok{ k[}\DecValTok{4}\NormalTok{], xx))}
+
+                            
+\FunctionTok{plot}\NormalTok{(plotdata[,}\DecValTok{1}\NormalTok{], plotdata[,}\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{bty =} \StringTok{"n"}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"Proportion of Infectious Cases"}\NormalTok{,}
+     \AttributeTok{ylab =} \StringTok{"Expected Proportion of Secondary Cases"}\NormalTok{,}
+     \AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{lty =} \DecValTok{4}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(plotdata[,}\DecValTok{1}\NormalTok{], plotdata[,}\DecValTok{3}\NormalTok{], }\AttributeTok{lty =} \DecValTok{3}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(plotdata[,}\DecValTok{1}\NormalTok{], plotdata[,}\DecValTok{4}\NormalTok{], }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(plotdata[,}\DecValTok{1}\NormalTok{], plotdata[,}\DecValTok{5}\NormalTok{], }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\AttributeTok{x =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{y =} \FloatTok{0.35}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"k = 0.1"}\NormalTok{, }\StringTok{"k = 0.5"}\NormalTok{, }\StringTok{"k = 2.0"}\NormalTok{, }\StringTok{"No Variation"}\NormalTok{), }
+       \AttributeTok{lty =} \DecValTok{4}\SpecialCharTok{:}\DecValTok{1}\NormalTok{, }\AttributeTok{bty =} \StringTok{"n"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{mtext}\NormalTok{(}\FunctionTok{bquote}\NormalTok{(R[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{\textasciitilde{}}\StringTok{"= 3.0"}\NormalTok{), }\AttributeTok{adj =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{smith_response_LancetID_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\hypertarget{final-outbreak-size}{%
+\subsection{Final Outbreak Size}\label{final-outbreak-size}}
+
+Let \(Y\) represent the sum of all cases in a transmission chain
+(including the index case), resulting in a final outbreak size (Dwass,
+1969). Using branching process theory, the distribution of the total
+number of secondary infections in a single transmission chain (including
+the index case at generation) can be defined by the probability
+generating function (pgf) yielding the implicit relationship (Yan 2008):
+
+\[G_Y(s) = sG_Z((G_Y(s))\] We can treat this as
+\(G_Y(s) = \sum_{y=1}^\infty q_ys^y\), where \(q_y = P(Y=y)\), allowing
+us to extract the probability (Becker 1974; Blumberg 2014):
+
+\[
+P(Y=y)=\frac{1}{y!}\frac{d_yG_Y(s)}{ds^y}\Bigg|_{s=0}
+\] Where \(Y=1, 2, 3\dots\)
+
+Plugging in the negative binomial distribution yields (see Smith 2022
+(\href{}{supplementary information, section 4}) and Blumberg 2012) \[
+P(Y=y)=\bigg(\frac{n}{y}\bigg)\frac{\Gamma(ky+y-n)}{\Gamma(ky)(y-n)!}\frac{(\frac{R_0}{k})^{y-n}}{(1+\frac{R_0}{k})^{ky+y-n}}
+\] Where \(n\) represents the number of index cases initiating the
+outbreak and \(Y=1, 2, 3\dots\).
+
+The this is implemented in R software by exponentiating the
+log-likelihood (for computational ease):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{outbreakprob }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(y, R, k)\{}
+\NormalTok{  l }\OtherTok{\textless{}{-}} \FunctionTok{lgamma}\NormalTok{(k }\SpecialCharTok{*}\NormalTok{ y }\SpecialCharTok{+}\NormalTok{ (y }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{{-}}\NormalTok{ (}\FunctionTok{lgamma}\NormalTok{(k }\SpecialCharTok{*}\NormalTok{ y) }\SpecialCharTok{+} \FunctionTok{lgamma}\NormalTok{(y }\SpecialCharTok{+} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}\NormalTok{ (y }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{log}\NormalTok{(R }\SpecialCharTok{/}\NormalTok{ k) }\SpecialCharTok{{-}}\NormalTok{ (k }\SpecialCharTok{*}\NormalTok{ y }\SpecialCharTok{+}\NormalTok{ (y }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{*} \FunctionTok{log}\NormalTok{(}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ R }\SpecialCharTok{/}\NormalTok{ k)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{exp}\NormalTok{(l))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Figure 1B is generated with the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{R }\OtherTok{\textless{}{-}} \DecValTok{3}
+\NormalTok{maxoutbreak }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{outbrk\_prob1 }\OtherTok{\textless{}{-}} \FunctionTok{outbreakprob}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{maxoutbreak, R, k[}\DecValTok{1}\NormalTok{])}
+\NormalTok{outbrk\_prob2 }\OtherTok{\textless{}{-}} \FunctionTok{outbreakprob}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{maxoutbreak, R, k[}\DecValTok{2}\NormalTok{])}
+\NormalTok{outbrk\_prob3 }\OtherTok{\textless{}{-}} \FunctionTok{outbreakprob}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{maxoutbreak, R, k[}\DecValTok{3}\NormalTok{])}
+\NormalTok{outbrk\_prob4 }\OtherTok{\textless{}{-}} \FunctionTok{outbreakprob}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{maxoutbreak, R, k[}\DecValTok{4}\NormalTok{])}
+
+\NormalTok{xx }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, maxoutbreak, }\AttributeTok{by =} \FloatTok{0.01}\NormalTok{)}
+\NormalTok{maxrange }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, maxoutbreak, }\DecValTok{1}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{log}\NormalTok{(}\FunctionTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, maxoutbreak)), }\FunctionTok{range}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{11}\NormalTok{,}\DecValTok{0}\NormalTok{), }\AttributeTok{type =} \StringTok{\textquotesingle{}n\textquotesingle{}}\NormalTok{, }\AttributeTok{xlab =} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }\AttributeTok{axes =}\NormalTok{ F)}
+  \FunctionTok{points}\NormalTok{(}\FunctionTok{log}\NormalTok{(maxrange), }\FunctionTok{log}\NormalTok{(outbrk\_prob1), }\AttributeTok{col =} \DecValTok{1}\NormalTok{, }\AttributeTok{pch=}\DecValTok{2}\NormalTok{, }\AttributeTok{cex=}\DecValTok{1}\NormalTok{)}
+  \FunctionTok{points}\NormalTok{(}\FunctionTok{log}\NormalTok{(maxrange), }\FunctionTok{log}\NormalTok{(outbrk\_prob2), }\AttributeTok{col =} \DecValTok{1}\NormalTok{, }\AttributeTok{pch=}\DecValTok{3}\NormalTok{, }\AttributeTok{cex=}\DecValTok{1}\NormalTok{)}
+  \FunctionTok{points}\NormalTok{(}\FunctionTok{log}\NormalTok{(maxrange), }\FunctionTok{log}\NormalTok{(outbrk\_prob3), }\AttributeTok{col =} \DecValTok{1}\NormalTok{, }\AttributeTok{pch=}\DecValTok{4}\NormalTok{, }\AttributeTok{cex=}\DecValTok{1}\NormalTok{)}
+  \FunctionTok{points}\NormalTok{(}\FunctionTok{log}\NormalTok{(maxrange), }\FunctionTok{log}\NormalTok{(outbrk\_prob4), }\AttributeTok{col =} \DecValTok{1}\NormalTok{, }\AttributeTok{pch=}\DecValTok{19}\NormalTok{, }\AttributeTok{cex=}\DecValTok{1}\NormalTok{)}
+  \FunctionTok{axis}\NormalTok{(}\AttributeTok{side=}\DecValTok{1}\NormalTok{, }\AttributeTok{at=}\FunctionTok{log}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FunctionTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{, maxoutbreak }\SpecialCharTok{+} \DecValTok{10}\NormalTok{, }\AttributeTok{b =} \DecValTok{10}\NormalTok{))), }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FunctionTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{, maxoutbreak }\SpecialCharTok{+} \DecValTok{10}\NormalTok{, }\AttributeTok{b =} \DecValTok{10}\NormalTok{)))}
+  \FunctionTok{axis}\NormalTok{(}\AttributeTok{side=}\DecValTok{2}\NormalTok{, }\AttributeTok{at=}\FunctionTok{log}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{100000}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{10000}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{1000}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{100}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)), }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{100000}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{10000}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{1000}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{100}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+  \FunctionTok{mtext}\NormalTok{(}\AttributeTok{side=}\DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}Final Outbreak Size\textquotesingle{}}\NormalTok{, }\AttributeTok{padj=}\DecValTok{4}\NormalTok{)}
+  \FunctionTok{mtext}\NormalTok{(}\AttributeTok{side=}\DecValTok{2}\NormalTok{, }\StringTok{\textquotesingle{}Probability\textquotesingle{}}\NormalTok{, }\AttributeTok{padj=}\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{)}
+  \FunctionTok{legend}\NormalTok{(}\StringTok{\textquotesingle{}topright\textquotesingle{}}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"k = 0.1"}\NormalTok{, }\StringTok{"k = 0.5"}\NormalTok{, }\StringTok{"k = 2.0"}\NormalTok{, }\StringTok{"No Variation"}\NormalTok{), }
+         \AttributeTok{pch=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{19}\NormalTok{), }\AttributeTok{cex=}\DecValTok{1}\NormalTok{, }\AttributeTok{bty=}\StringTok{"n"}\NormalTok{)}
+  \FunctionTok{mtext}\NormalTok{(}\FunctionTok{bquote}\NormalTok{(R[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{\textasciitilde{}}\StringTok{"= 3.0"}\NormalTok{), }\AttributeTok{adj =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{smith_response_LancetID_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\hypertarget{thanks}{%
+\subsection{Thanks}\label{thanks}}
+
+Special thanks to Dr.~Andrew Hill for providing mathematical oversight
+into this analysis.
+
+\hypertarget{references}{%
+\subsection{References}\label{references}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Lloyd-Smith, JO, \emph{et al}. Superspreading and the effect of
+  individual variation on disease emergence, Nature 438, 355--359 (2005)
+\item
+  Yan, P. Distribution Theory, Stochastic Processes and Infectious
+  Disease Modelling, pages 229. Springer Berlin Heidelberg, Berlin,
+  Heidelberg, 2008.
+\item
+  Becker, N. On parametric estimation for mortal branching processes.
+  Biometrika, 61(3):393, 1974.
+\item
+  Dwass, M. The total progeny in a branching process and a related
+  random walk. Journal of Applied Probability, 6(3):682, 1969.
+\item
+  Blumberg S and Lloyd-Smith JO. Inference of r0 and transmission
+  heterogeneity from the size distribution of stuttering chains. PLoS
+  Comput Biol., 5(9):393, 2013.
+\item
+  Smith, JP, \emph{et al}. A cluster-based method to quantify individual
+  heterogeneity in tuberculosis transmission. Epidemiology 33, 217--227.
+  2022
+\end{enumerate}
+
+\end{document}

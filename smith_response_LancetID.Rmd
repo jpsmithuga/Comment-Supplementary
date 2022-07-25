@@ -1,11 +1,37 @@
 ---
 title: "Supplementary Materials: It matters who is spreading monkeypox"
 author: "Jonathan Smith, PhD, MPH"
-output: rmarkdown::github_document
+output:
+  #pdf_document: default
+  html_document:
+  rmarkdown::github_document:
     toc: yes
-  pdf_document: default
 date: '2022-07-24'
 ---
+---
+
+<!-- \newcommand{\complete}{\hfill$\Box$} -->
+<!-- \newcommand{\T}{{\mathsf T}} -->
+<!-- \newcommand{\bi}{\begin{itemize}} -->
+<!-- \newcommand{\ei}{\end{itemize}} -->
+<!-- \newcommand{\be}{\begin{eqnarray*}} -->
+<!-- \newcommand{\ee}{\end{eqnarray*}} -->
+<!-- \newcommand{\fr}[2]{\mbox{${\textstyle \frac{#1}{#2}}$}} -->
+<!-- \newcommand{\convd}{\stackrel{\scriptscriptstyle{\text{d}}}{\longrightarrow}} -->
+<!-- \newcommand{\convp}{\stackrel{\scriptscriptstyle{\text{p}}}{\longrightarrow}} -->
+<!-- \newcommand{\convL}{\stackrel{\scriptscriptstyle{\text{$L_1$}}}{\longrightarrow}} -->
+<!-- \newcommand{\convLL}{\stackrel{\scriptscriptstyle{\text{$L_2$}}}{\longrightarrow}} -->
+<!-- \newcommand{\convas}{\stackrel{\scriptscriptstyle{\text{a.s.}}}{\longrightarrow}} -->
+<!-- \newcommand{\eqd}{\stackrel{\scriptscriptstyle{\text{d}}}{=}} -->
+
+--------------------------
+
+Written in R version `r getRversion()`.
+
+--------------------------
+
+<!-- <font size="5"> --> 
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -32,6 +58,7 @@ $$ \begin{eqnarray*} f_\mathrm{trans}(x) =  F'_\mathrm{trans}(x)
 \\
 &\sim & \mathrm{Gamma}(k+1, k/R_0) 
 \end{eqnarray*}$$  
+
 The rate parameter remains the same and the shape parameter increases by 1. 
 
 To calculate $t_p$, the expected proportion of transmission due to the most infectious $100p$\% of cases, we first find the $(1-p)$th centile of the individual reproduction number, $x_p = F^{-1}_\nu(1-p)$, then calculate $t_p = 1-F_\mathrm{trans}(x_p)$. As both random variables are gamma distributed, this is implemented in R via the qgamma ($F^{-1}$) and pgamma ($F$) functions. 
