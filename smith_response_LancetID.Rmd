@@ -1,8 +1,7 @@
 ---
 title: "Supplementary Materials: It matters who is spreading monkeypox"
 author: "Jonathan Smith, PhD, MPH"
-output:
-  html_document: 
+output: rmarkdown::github_document
     toc: yes
   pdf_document: default
 date: '2022-07-24'
