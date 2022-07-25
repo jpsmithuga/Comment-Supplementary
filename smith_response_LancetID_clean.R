@@ -1,12 +1,16 @@
-################################
-# Jonathan Smith, PhD, MPH
-################################
+##################################
+# Author: Jonathan Smith, PhD, MPH
+##################################
 
 # rm(list = ls())
 # dev.off()
 
-
+# Global Parameters
 R <- 3
+# Try alternate R values
+  # R <- 2
+  # R <- 1
+  # R <- 0.5
 k <- c(0.1, 0.5, 2, 100000)
 
 ###############################
@@ -20,8 +24,7 @@ propinfection <- function(R, k, prop){
   return(tp) 
 }
 
-xx <- seq(0, 1, 0.001)
-
+xx <- seq(0, 1, 0.001) # proportions 0 to 1 by 0.001
 #colors <- ggsci::pal_lancet(palette = c("lanonc"), alpha = 0.9)(9)
 
 plotdata <- cbind(xx, 
@@ -51,16 +54,12 @@ outbreakprob <- function(y, R, k){
   return(exp(l))
 }
 
-
 maxoutbreak <- 100
 outbrk_prob1 <- outbreakprob(1:maxoutbreak, R, k[1])
 outbrk_prob2 <- outbreakprob(1:maxoutbreak, R, k[2])
 outbrk_prob3 <- outbreakprob(1:maxoutbreak, R, k[3])
 outbrk_prob4 <- outbreakprob(1:maxoutbreak, R, k[4])
 
-outbrk_prob1[25]/outbrk_prob4[25]
-
-xx <- seq(0, maxoutbreak, by = 0.01)
 maxrange <- seq(1, maxoutbreak, 1)
 
 plot(log(range(1, maxoutbreak)), range(-11,0), type = 'n', xlab = '', ylab = '', axes = F)
@@ -70,8 +69,8 @@ plot(log(range(1, maxoutbreak)), range(-11,0), type = 'n', xlab = '', ylab = '',
   points(log(maxrange), log(outbrk_prob4), col = 1, pch=19, cex=1)
   axis(side=1, at=log(c(1, 5, seq(10, maxoutbreak + 10, b = 10))), c(1, 5, seq(10, maxoutbreak + 10, b = 10)))
   axis(side=2, at=log(c(1/100000, 1/10000, 1/1000, 1/100, 1/10, 1/2, 1)), c(1/100000, 1/10000, 1/1000, 1/100, 1/10, 1/2, 1))
-  mtext(side=1, 'Final Outbreak Size', padj=4)
-  mtext(side=2, 'Probability', padj=-4)
+  mtext(side=1, 'Final Outbreak Size', padj = 4)
+  mtext(side=2, 'Probability', padj = -4)
   legend('topright', c("k = 0.1", "k = 0.5", "k = 2.0", "No Variation"), 
          pch=c(2,3,8,19), cex=1, bty="n")
   mtext(bquote(R[0]~"= 3.0"), adj = 1)
@@ -80,9 +79,8 @@ plot(log(range(1, maxoutbreak)), range(-11,0), type = 'n', xlab = '', ylab = '',
 
 
 
-##### Combined
-pdf("~jonathansmith/Dropbox/Emory/Lancet/Figure1.pdf", height = 5, width = 10)
-par(mfrow=c(1,2))
+##### Combined Figure
+par(mfrow = c(1,2))
 # A
 plot(plotdata[,1], plotdata[,2], type = "l", bty = "n",
      xlab = "Proportion of Infectious Cases",
@@ -110,4 +108,3 @@ plot(log(range(1, maxoutbreak)), range(-11,0), type = 'n', xlab = '', ylab = '',
          pch=c(2,3,8,19), cex=1, bty="n")
   mtext(bquote(R[0]~"= 3.0"), adj = 1)
   mtext("B)", adj = -0.1, padj = -2)
-dev.off()
