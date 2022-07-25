@@ -1,0 +1,156 @@
+---
+title: "Supplementary Materials: It matters who is spreading monkeypox"
+author: "Jonathan Smith, PhD, MPH"
+output:
+  html_document: 
+    toc: yes
+  pdf_document: default
+date: '2022-07-24'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Background
+We assume the number of secondary cases produced from each infectious case is distributed according to a negative binomial distribution with mean $R_0$ (the basic reproductive number) and dispersion parameter $k$. The parameter $k$ quantifies the degree of individual heterogeneity by measuring overdispersion in the distribution (e.g., higher than expected variation). For a given $R<1$, smaller values of $k$ ($k<<1$) suggest increased heterogeneity in the number of secondary cases between individual index cases. As $k$ increases, transmission becomes more uniform and centered around the mean, $R_0$. 
+
+## Proportion of secondary cases attributed to the proportion of infectious cases
+
+Lloyd-Smith *et al.* (L-S) ([supplementary information 2.2.5](https://static-content.springer.com/esm/art%3A10.1038%2Fnature04153/MediaObjects/41586_2005_BFnature04153_MOESM1_ESM.pdf)) propose a distribution for describing transmission based from the distribution of the individual reproduction number $\nu$: 
+$$ F_\mathrm{trans}(x) = \frac{1}{R_0} \int_0^x u\,  f_\nu (u) \, du $$
+This gives the cumulative distribution function (CDF) in terms of the individual reproduction number density $f_\nu$, as the proportion of all transmission due to infectious individuals with reproduction number $\nu <x$.  
+
+In the specific case when $\nu$ is gamma distributed with shape parameter $k>0$ and rate parameter $k/R_0$, where $R_0$ is the mean (expected) individual reproduction number, we have 
+$$ f_\nu(u) = \frac{k^k}{R_0^k \, \Gamma(k)} u^{k-1} e^{-ku/R_0} $$
+It follows that 
+$$ \begin{eqnarray*} f_\mathrm{trans}(x) =  F'_\mathrm{trans}(x) 
+&=& \frac{1}{R_0} x f_\nu(x) 
+\\
+&=& \frac{k^k}{R_0^{k+1} \, \Gamma(k)} x^k e^{-kx/R_0} 
+\\
+&=& \frac{k^{k+1}}{R_0^{k+1} \, \Gamma(k+1)} x^k e^{-kx/R_0} 
+\\
+&\sim & \mathrm{Gamma}(k+1, k/R_0) 
+\end{eqnarray*}$$  
+The rate parameter remains the same and the shape parameter increases by 1. 
+
+To calculate $t_p$, the expected proportion of transmission due to the most infectious $100p$\% of cases, we first find the $(1-p)$th centile of the individual reproduction number, $x_p = F^{-1}_\nu(1-p)$, then calculate $t_p = 1-F_\mathrm{trans}(x_p)$. As both random variables are gamma distributed, this is implemented in R via the qgamma ($F^{-1}$) and pgamma ($F$) functions. 
+
+```{r, echo = TRUE}
+propinfection <- function(R, k, prop){
+  xp <- qgamma(1 - prop, shape = k, rate = k/R) 
+  tp <- 1 - pgamma(xp, shape = k+1, rate = k/R) 
+  return(tp) 
+}
+```
+
+## The relationship between $p$ and $t_p$
+
+Parameterizing by $x_p$, and noting that $p=1-F_\nu(x_p)$, the first derivative is 
+$$ \frac{d t_p}{dp} = \frac{dt_p/dx_p}{dp/dx_p} 
+= \frac{-F'_\mathrm{trans}(x_p)}{-F'_\nu(x_p)} = 
+\frac{R_0^{-1} x_p f_\nu(x_p)}{f_\nu(x_p)} = \frac{x_p}{R_0} > 0$$
+which confirms that $t_p$ is an increasing function of $p$. When $x_p=0$, $(p, t_p) = (1,1)$ at which the point the derivative is zero (horizontal tangent). Similarly, when $x_p=+\infty$, $(p, t_p) = (0,0)$ at which the point the derivative is infinite (vertical tangent). 
+
+The second derivative is negative implying concavity of the graph of $t_p$ as a function of $p$. 
+$$ \frac{d^2 t_p}{dp^2} 
+= \frac{d}{dx_p} \left(\frac{d t_p}{dp}\right) \times \frac{d x_p}{dp} 
+= \frac{1}{R_0} \times \frac{1}{dp/dx_p} = - \frac{1}{R_0 f_\nu(x_p)} <0$$
+These properties can be seen in Figure 1A:
+
+```{r, echo = TRUE}
+xx <- seq(0, 1, 0.001)
+k <- c(0.1, 0.5, 2, 100000) # 100000 -> ~infty (homogenous transmission)
+plotdata <- cbind(xx, 
+                  propinfection(R = 3, k = k[1], xx),
+                  propinfection(R = 3, k = k[2], xx),
+                  propinfection(R = 3, k = k[3], xx),
+                  propinfection(R = 3, k = k[4], xx))
+
+                            
+plot(plotdata[,1], plotdata[,2], type = "l", bty = "n",
+     xlab = "Proportion of Infectious Cases",
+     ylab = "Expected Proportion of Secondary Cases",
+     lwd = 2, lty = 4)
+lines(plotdata[,1], plotdata[,3], lty = 3, lwd = 2)
+lines(plotdata[,1], plotdata[,4], lty = 2, lwd = 2)
+lines(plotdata[,1], plotdata[,5], lty = 1, lwd = 2)
+legend(x = 0.6, y = 0.35, c("k = 0.1", "k = 0.5", "k = 2.0", "No Variation"), 
+       lty = 4:1, bty = "n", lwd = 2)
+mtext(bquote(R[0]~"= 3.0"), adj = 1)
+
+```
+
+## Final Outbreak Size
+Let $Y$ represent the sum of all cases in a transmission chain (including the index case), resulting in a final outbreak size (Dwass, 1969). Using branching process theory, the distribution of the total number of secondary infections in a single transmission chain (including the index case at generation) can be defined by the probability generating function (pgf) yielding the implicit relationship (Yan 2008):
+
+$$G_Y(s) = sG_Z((G_Y(s))$$
+We can treat this as $G_Y(s) = \sum_{y=1}^\infty q_ys^y$, where $q_y = P(Y=y)$, allowing us to extract the probability (Becker 1974; Blumberg 2014): 
+
+$$
+P(Y=y)=\frac{1}{y!}\frac{d_yG_Y(s)}{ds^y}\Bigg|_{s=0}
+$$
+Where $Y=1, 2, 3\dots$
+
+Plugging in the negative binomial distribution yields (see Smith 2022 ([supplementary information, section 4]()) and Blumberg 2012)
+$$
+P(Y=y)=\bigg(\frac{n}{y}\bigg)\frac{\Gamma(ky+y-n)}{\Gamma(ky)(y-n)!}\frac{(\frac{R_0}{k})^{y-n}}{(1+\frac{R_0}{k})^{ky+y-n}}
+$$
+Where $n$ represents the number of index cases initiating the outbreak and $Y=1, 2, 3\dots$.
+
+The this is implemented in R software by exponentiating the log-likelihood (for computational ease):
+```{r, echo=TRUE}
+outbreakprob <- function(y, R, k){
+  l <- lgamma(k * y + (y - 1)) - (lgamma(k * y) + lgamma(y + 1)) + (y - 1) * log(R / k) - (k * y + (y - 1)) * log(1 + R / k)
+  return(exp(l))
+}
+```
+
+Figure 1B is generated with the following code:
+
+```{r, echo=TRUE}
+
+R <- 3
+maxoutbreak <- 100
+outbrk_prob1 <- outbreakprob(1:maxoutbreak, R, k[1])
+outbrk_prob2 <- outbreakprob(1:maxoutbreak, R, k[2])
+outbrk_prob3 <- outbreakprob(1:maxoutbreak, R, k[3])
+outbrk_prob4 <- outbreakprob(1:maxoutbreak, R, k[4])
+
+xx <- seq(0, maxoutbreak, by = 0.01)
+maxrange <- seq(1, maxoutbreak, 1)
+
+plot(log(range(1, maxoutbreak)), range(-11,0), type = 'n', xlab = '', ylab = '', axes = F)
+  points(log(maxrange), log(outbrk_prob1), col = 1, pch=2, cex=1)
+  points(log(maxrange), log(outbrk_prob2), col = 1, pch=3, cex=1)
+  points(log(maxrange), log(outbrk_prob3), col = 1, pch=4, cex=1)
+  points(log(maxrange), log(outbrk_prob4), col = 1, pch=19, cex=1)
+  axis(side=1, at=log(c(1, 5, seq(10, maxoutbreak + 10, b = 10))), c(1, 5, seq(10, maxoutbreak + 10, b = 10)))
+  axis(side=2, at=log(c(1/100000, 1/10000, 1/1000, 1/100, 1/10, 1/2, 1)), c(1/100000, 1/10000, 1/1000, 1/100, 1/10, 1/2, 1))
+  mtext(side=1, 'Final Outbreak Size', padj=4)
+  mtext(side=2, 'Probability', padj=-4)
+  legend('topright', c("k = 0.1", "k = 0.5", "k = 2.0", "No Variation"), 
+         pch=c(2:4, 19), cex=1, bty="n")
+  mtext(bquote(R[0]~"= 3.0"), adj = 1)
+```
+
+## Thanks
+Special thanks to Dr. Andrew Hill for providing mathematical oversight into this analysis. 
+
+## References
+
+1. Lloyd-Smith, JO, *et al*. Superspreading and the effect of individual variation on disease emergence, Nature 438, 355–359 (2005)
+
+2. Yan, P. Distribution Theory, Stochastic Processes and Infectious Disease Modelling, pages 229. Springer Berlin Heidelberg, Berlin, Heidelberg, 2008.
+
+3. Becker, N. On parametric estimation for mortal branching processes.
+Biometrika, 61(3):393, 1974.
+
+4. Dwass, M. The total progeny in a branching process and a related random
+walk. Journal of Applied Probability, 6(3):682, 1969.
+
+5. Blumberg S and Lloyd-Smith JO. Inference of r0 and transmission heterogeneity
+from the size distribution of stuttering chains. PLoS Comput Biol., 5(9):393, 2013.
+
+6. Smith, JP, *et al*. A cluster-based method to quantify individual heterogeneity in tuberculosis transmission. Epidemiology 33, 217–227. 2022
