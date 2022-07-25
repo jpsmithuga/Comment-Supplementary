@@ -1,0 +1,113 @@
+################################
+# Jonathan Smith, PhD, MPH
+################################
+
+# rm(list = ls())
+# dev.off()
+
+
+R <- 3
+k <- c(0.1, 0.5, 2, 100000)
+
+###############################
+# Figure 1A
+###############################
+
+# function to calculate proportion of infection (see supplementary document)
+propinfection <- function(R, k, prop){
+  xp <- qgamma(1 - prop, shape = k, rate = k/R) 
+  tp <- 1 - pgamma(xp, shape = k+1, rate = k/R) 
+  return(tp) 
+}
+
+xx <- seq(0, 1, 0.001)
+
+#colors <- ggsci::pal_lancet(palette = c("lanonc"), alpha = 0.9)(9)
+
+plotdata <- cbind(xx, 
+                  propinfection(R = 3, k = k[1], xx),
+                  propinfection(R = 3, k = k[2], xx),
+                  propinfection(R = 3, k = k[3], xx),
+                  propinfection(R = 3, k = k[4], xx))
+
+plot(plotdata[,1], plotdata[,2], type = "l", bty = "n",
+     xlab = "Proportion of Infectious Cases",
+     ylab = "Expected Proportion of Secondary Cases",
+     lwd = 2, lty = 4)
+  lines(plotdata[,1], plotdata[,3], lty = 3, lwd = 2)
+  lines(plotdata[,1], plotdata[,4], lty = 2, lwd = 2)
+  lines(plotdata[,1], plotdata[,5], lty = 1, lwd = 2)
+  legend(x = 0.6, y = 0.35, c("k = 0.1", "k = 0.5", "k = 2.0", "No Variation"), 
+         lty = 4:1, bty = "n", lwd = 2)
+  mtext(bquote(R[0]~"= 3.0"), adj = 1)
+  mtext("A)", adj = -0.1)
+
+###############################
+# B
+###############################
+# Function to calculate the probability of an outbreak of size Y
+outbreakprob <- function(y, R, k){
+  l <- lgamma(k * y + (y - 1)) - (lgamma(k * y) + lgamma(y + 1)) + (y - 1) * log(R / k) - (k * y + (y - 1)) * log(1 + R / k)
+  return(exp(l))
+}
+
+
+maxoutbreak <- 100
+outbrk_prob1 <- outbreakprob(1:maxoutbreak, R, k[1])
+outbrk_prob2 <- outbreakprob(1:maxoutbreak, R, k[2])
+outbrk_prob3 <- outbreakprob(1:maxoutbreak, R, k[3])
+outbrk_prob4 <- outbreakprob(1:maxoutbreak, R, k[4])
+
+outbrk_prob1[25]/outbrk_prob4[25]
+
+xx <- seq(0, maxoutbreak, by = 0.01)
+maxrange <- seq(1, maxoutbreak, 1)
+
+plot(log(range(1, maxoutbreak)), range(-11,0), type = 'n', xlab = '', ylab = '', axes = F)
+  points(log(maxrange), log(outbrk_prob1), col = 1, pch=2, cex=1)
+  points(log(maxrange), log(outbrk_prob2), col = 1, pch=3, cex=1)
+  points(log(maxrange), log(outbrk_prob3), col = 1, pch=8, cex=1)
+  points(log(maxrange), log(outbrk_prob4), col = 1, pch=19, cex=1)
+  axis(side=1, at=log(c(1, 5, seq(10, maxoutbreak + 10, b = 10))), c(1, 5, seq(10, maxoutbreak + 10, b = 10)))
+  axis(side=2, at=log(c(1/100000, 1/10000, 1/1000, 1/100, 1/10, 1/2, 1)), c(1/100000, 1/10000, 1/1000, 1/100, 1/10, 1/2, 1))
+  mtext(side=1, 'Final Outbreak Size', padj=4)
+  mtext(side=2, 'Probability', padj=-4)
+  legend('topright', c("k = 0.1", "k = 0.5", "k = 2.0", "No Variation"), 
+         pch=c(2,3,8,19), cex=1, bty="n")
+  mtext(bquote(R[0]~"= 3.0"), adj = 1)
+  mtext("B)", adj = -0.1)
+
+
+
+
+##### Combined
+pdf("~jonathansmith/Dropbox/Emory/Lancet/Figure1.pdf", height = 5, width = 10)
+par(mfrow=c(1,2))
+# A
+plot(plotdata[,1], plotdata[,2], type = "l", bty = "n",
+     xlab = "Proportion of Infectious Cases",
+     ylab = "Expected Proportion of Secondary Cases",
+     lwd = 2, lty = 4)
+  lines(plotdata[,1], plotdata[,3], lty = 3, lwd = 2)
+  lines(plotdata[,1], plotdata[,4], lty = 2, lwd = 2)
+  lines(plotdata[,1], plotdata[,5], lty = 1, lwd = 2)
+  legend(x = 0.6, y = 0.35, c("k = 0.1", "k = 0.5", "k = 2.0", "No Variation"), 
+         lty = 4:1, bty = "n", lwd = 2)
+  mtext(bquote(R[0]~"= 3.0"), adj = 1)
+  mtext("A)", adj = -0.1, padj = -2)
+
+# B
+plot(log(range(1, maxoutbreak)), range(-11,0), type = 'n', xlab = '', ylab = '', axes = F)
+  points(log(maxrange), log(outbrk_prob1), col = 1, pch=2, cex=1)
+  points(log(maxrange), log(outbrk_prob2), col = 1, pch=3, cex=1)
+  points(log(maxrange), log(outbrk_prob3), col = 1, pch=8, cex=1)
+  points(log(maxrange), log(outbrk_prob4), col = 1, pch=19, cex=1)
+  axis(side = 1, at = log(c(1, 5, seq(10, maxoutbreak + 10, b = 10))), c(1, 5, seq(10, maxoutbreak + 10, b = 10)))
+  axis(side = 2, at = log(c(1/100000, 1/10000, 1/1000, 1/100, 1/10, 1/2, 1)), c(1/100000, 1/10000, 1/1000, 1/100, 1/10, 1/2, 1))
+  mtext(side = 1, 'Final Outbreak Size, Y', padj=4)
+  mtext(side = 2, 'Probability', padj=-4)
+  legend('topright', c("k = 0.1", "k = 0.5", "k = 2.0", "No Variation"), 
+         pch=c(2,3,8,19), cex=1, bty="n")
+  mtext(bquote(R[0]~"= 3.0"), adj = 1)
+  mtext("B)", adj = -0.1, padj = -2)
+dev.off()
