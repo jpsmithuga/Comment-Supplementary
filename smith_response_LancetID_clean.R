@@ -49,17 +49,28 @@ plot(plotdata[,1], plotdata[,2], type = "l", bty = "n",
 # B
 ###############################
 # Function to calculate the probability of an outbreak of size Y
-outbreakprob <- function(y, R, k){
-  l <- lgamma(k * y + (y - 1)) - (lgamma(k * y) + lgamma(y + 1)) + (y - 1) * log(R / k) - (k * y + (y - 1)) * log(1 + R / k)
-  return(exp(l))
+outbreakprob <- function(y, R0, k){
+    if(y == 1){
+      1 / (1 + R0 / k)^k
+    }
+    else {
+      a <- 0
+      for(j in 0:(y - 2)){	
+        a <- a + log(j / k + y)
+      }
+      ll <- a - lfactorial(y) + log(((k / (R0 + k))^(k * y))*((R0 * k/(R0 + k))^(y - 1)))
+      exp(ll)
+    }
 }
-
+  
 maxoutbreak <- 100
-outbrk_prob1 <- outbreakprob(1:maxoutbreak, R, k[1])
-outbrk_prob2 <- outbreakprob(1:maxoutbreak, R, k[2])
-outbrk_prob3 <- outbreakprob(1:maxoutbreak, R, k[3])
-outbrk_prob4 <- outbreakprob(1:maxoutbreak, R, k[4])
-
+outbrk_prob1 <- outbrk_prob2 <- outbrk_prob3 <- outbrk_prob4 <- c()
+for (i in 1:maxoutbreak){
+  outbrk_prob1[i] <- outbreakprob(y = i, R0 = R, k = k[1])
+  outbrk_prob2[i] <- outbreakprob(i, R, k[2])
+  outbrk_prob3[i] <- outbreakprob(i, R, k[3])
+  outbrk_prob4[i] <- outbreakprob(i, R, k[4])
+}
 maxrange <- seq(1, maxoutbreak, 1)
 
 plot(log(range(1, maxoutbreak)), range(-11,0), type = 'n', xlab = '', ylab = '', axes = F)
